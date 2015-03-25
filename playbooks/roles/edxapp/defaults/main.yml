@@ -452,6 +452,7 @@ EDXAPP_ECOMMERCE_API_SIGNING_KEY: 'SET-ME-PLEASE'
 #     custom_domain: mycdn.org
 #     access_key: XXXAWS_ACCESS_KEYXXX
 #     secret_key: XXXAWS_SECRETY_KEYXXX
+#NB: access_key and secret_key are unneccessary if you use IAM roles
 EDXAPP_PROFILE_IMAGE_BACKEND_CONFIG:
   storage_class: storages.backends.overwrite.OverwriteStorage
   storage_kwargs:
