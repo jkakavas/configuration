@@ -178,7 +178,7 @@ EDXAPP_BOOK_URL: ""
 EDXAPP_SITE_NAME: 'localhost'
 EDXAPP_LMS_SITE_NAME: "{{ EDXAPP_SITE_NAME }}"
 EDXAPP_CMS_SITE_NAME: 'localhost'
-EDXAPP_MEDIA_URL:  ""
+EDXAPP_MEDIA_URL:  "/media/"
 EDXAPP_ANALYTICS_SERVER_URL:  ""
 EDXAPP_FEEDBACK_SUBMISSION_EMAIL: ""
 EDXAPP_CELERY_BROKER_HOSTNAME: ""
@@ -458,8 +458,8 @@ EDXAPP_ECOMMERCE_API_SIGNING_KEY: 'SET-ME-PLEASE'
 EDXAPP_PROFILE_IMAGE_BACKEND_CONFIG:
   storage_class: storages.backends.overwrite.OverwriteStorage
   storage_kwargs:
-    location: /edx/var/edxapp/uploads/profile-images
-    base_url: /media/profile-images
+    location: "{{ edxapp_media_dir }}/profile-images"
+    base_url: "{{ EDXAPP_MEDIA_URL }}/profile-images"
 
 #-------- Everything below this line is internal to the role ------------
 
@@ -482,6 +482,7 @@ edxapp_node_bin: "{{ edxapp_code_dir }}/node_modules/.bin"
 edxapp_user: edxapp
 edxapp_deploy_path: "{{ edxapp_venv_bin }}:{{ edxapp_code_dir }}/bin:{{ edxapp_rbenv_bin }}:{{ edxapp_rbenv_shims }}:{{ edxapp_gem_bin }}:{{ edxapp_node_bin }}:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 edxapp_staticfile_dir: "{{ edxapp_data_dir }}/staticfiles"
+edxapp_media_dir: "{{ edxapp_data_dir }}/media"
 edxapp_course_static_dir: "{{ edxapp_data_dir }}/course_static"
 edxapp_course_data_dir: "{{ edxapp_data_dir }}/data"
 edxapp_upload_dir: "{{ edxapp_data_dir }}/uploads"
@@ -697,6 +698,7 @@ generic_env_config:  &edxapp_generic_env
   SYSLOG_SERVER:  "{{ EDXAPP_SYSLOG_SERVER }}"
   LOG_DIR:  "{{ COMMON_DATA_DIR }}/logs/edx"
   MEDIA_URL:  "{{ EDXAPP_MEDIA_URL }}"
+  MEDIA_ROOT: "{{ edxapp_media_dir }}"
   ANALYTICS_SERVER_URL:  "{{ EDXAPP_ANALYTICS_SERVER_URL }}"
   FEEDBACK_SUBMISSION_EMAIL: "{{ EDXAPP_FEEDBACK_SUBMISSION_EMAIL }}"
   TIME_ZONE: "{{ EDXAPP_TIME_ZONE }}"
