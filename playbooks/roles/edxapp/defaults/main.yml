@@ -461,7 +461,13 @@ EDXAPP_PROFILE_IMAGE_BACKEND:
     location: "{{ edxapp_media_dir }}/profile-images"
     base_url: "{{ EDXAPP_MEDIA_URL }}/profile-images"
 EDXAPP_PROFILE_IMAGE_EXPIRES_MINUTES: 5
-EDXAPP_PROFILE_IMAGE_MAX_SIZE_MB: 5
+
+# used to salt hashed usernames for profile image filenames
+EDXAPP_PROFILE_IMAGE_SECRET_KEY: placeholder_secret_key
+
+# In bytes
+EDXAPP_PROFILE_IMAGE_MAX_BYTES: 1048576
+EDXAPP_PROFILE_IMAGE_MIN_BYTES: 100
 
 #-------- Everything below this line is internal to the role ------------
 
@@ -780,6 +786,7 @@ lms_auth_config:
   CC_PROCESSOR_NAME: "{{ EDXAPP_CC_PROCESSOR_NAME }}"
   CC_PROCESSOR: "{{ EDXAPP_CC_PROCESSOR }}"
   TRACKING_SEGMENTIO_WEBHOOK_SECRET: "{{ EDXAPP_TRACKING_SEGMENTIO_WEBHOOK_SECRET }}"
+  PROFILE_IMAGE_SECRET_KEY: "{{ EDXAPP_PROFILE_IMAGE_SECRET_KEY }}"
 
 lms_env_config:
   <<: *edxapp_generic_env
@@ -802,6 +809,8 @@ lms_env_config:
   PDF_RECEIPT_COBRAND_LOGO_PATH: "{{ EDXAPP_PDF_RECEIPT_COBRAND_LOGO_PATH }}"
   PDF_RECEIPT_LOGO_PATH: "{{ EDXAPP_PDF_RECEIPT_LOGO_PATH }}"
   PROFILE_IMAGE_BACKEND: "{{ EDXAPP_PROFILE_IMAGE_BACKEND_CONFIG }}"
+  PROFILE_IMAGE_MIN_BYTES: "{{ EDXAPP_PROFILE_IMAGE_MIN_BYTES }}"
+  PROFILE_IMAGE_MAX_BYTES: "{{ EDXAPP_PROFILE_IMAGE_MAX_BYTES }}"
 
 cms_auth_config:
   <<: *edxapp_generic_auth
