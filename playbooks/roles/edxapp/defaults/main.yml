@@ -455,9 +455,9 @@ EDXAPP_ECOMMERCE_API_SIGNING_KEY: 'SET-ME-PLEASE'
 #NB: access_key and secret_key are unneccessary if you use IAM roles
 #NB2: custom_domain is REQUIRED. Otherwise, boto will generate a 
 # temporary URL whenever asked for the URL of a specific file.
-EDXAPP_PROFILE_IMAGE_BACKEND_CONFIG:
-  storage_class: storages.backends.overwrite.OverwriteStorage
-  storage_kwargs:
+EDXAPP_PROFILE_IMAGE_BACKEND:
+  class: storages.backends.overwrite.OverwriteStorage
+  options:
     location: "{{ edxapp_media_dir }}/profile-images"
     base_url: "{{ EDXAPP_MEDIA_URL }}/profile-images"
 EDXAPP_PROFILE_IMAGE_EXPIRES_MINUTES: 5
@@ -801,7 +801,7 @@ lms_env_config:
   PDF_RECEIPT_TAX_ID_LABEL: "{{ EDXAPP_PDF_RECEIPT_TAX_ID_LABEL }}"
   PDF_RECEIPT_COBRAND_LOGO_PATH: "{{ EDXAPP_PDF_RECEIPT_COBRAND_LOGO_PATH }}"
   PDF_RECEIPT_LOGO_PATH: "{{ EDXAPP_PDF_RECEIPT_LOGO_PATH }}"
-  PROFILE_IMAGE_BACKEND_CONFIG: "{{ EDXAPP_PROFILE_IMAGE_BACKEND_CONFIG }}"
+  PROFILE_IMAGE_BACKEND: "{{ EDXAPP_PROFILE_IMAGE_BACKEND_CONFIG }}"
 
 cms_auth_config:
   <<: *edxapp_generic_auth
