@@ -460,6 +460,8 @@ EDXAPP_PROFILE_IMAGE_BACKEND_CONFIG:
   storage_kwargs:
     location: "{{ edxapp_media_dir }}/profile-images"
     base_url: "{{ EDXAPP_MEDIA_URL }}/profile-images"
+EDXAPP_PROFILE_IMAGE_EXPIRES_MINUTES: 5
+EDXAPP_PROFILE_IMAGE_MAX_SIZE_MB: 5
 
 #-------- Everything below this line is internal to the role ------------
 
