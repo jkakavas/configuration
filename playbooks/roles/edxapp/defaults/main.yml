@@ -452,6 +452,8 @@ EDXAPP_ECOMMERCE_API_SIGNING_KEY: 'SET-ME-PLEASE'
 #     custom_domain: mybucket.s3.amazonaws.com
 #     access_key: XXXAWS_ACCESS_KEYXXX
 #     secret_key: XXXAWS_SECRETY_KEYXXX
+#     headers:
+#       Cache-Control: max-age-{{ EDXAPP_PROFILE_IMAGE_MAX_AGE }}
 #NB: access_key and secret_key are unneccessary if you use IAM roles
 #NB2: custom_domain is REQUIRED. Otherwise, boto will generate a 
 # temporary URL whenever asked for the URL of a specific file.
@@ -460,7 +462,8 @@ EDXAPP_PROFILE_IMAGE_BACKEND:
   options:
     location: "{{ edxapp_media_dir }}/profile-images"
     base_url: "{{ EDXAPP_MEDIA_URL }}/profile-images"
-EDXAPP_PROFILE_IMAGE_EXPIRES_MINUTES: 60
+
+EDXAPP_PROFILE_IMAGE_MAX_AGE: 31536000
 
 # used to salt hashed usernames for profile image filenames
 EDXAPP_PROFILE_IMAGE_SECRET_KEY: placeholder_secret_key
@@ -811,7 +814,6 @@ lms_env_config:
   PROFILE_IMAGE_BACKEND: "{{ EDXAPP_PROFILE_IMAGE_BACKEND_CONFIG }}"
   PROFILE_IMAGE_MIN_BYTES: "{{ EDXAPP_PROFILE_IMAGE_MIN_BYTES }}"
   PROFILE_IMAGE_MAX_BYTES: "{{ EDXAPP_PROFILE_IMAGE_MAX_BYTES }}"
-  PROFILE_IMAGE_EXPIRES_MINUTES: "{{ EDXAPP_PROFILE_IMAGE_EXPIRES_MINUTES }}"
 
 cms_auth_config:
   <<: *edxapp_generic_auth
